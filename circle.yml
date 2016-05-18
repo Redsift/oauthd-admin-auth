@@ -1,0 +1,22 @@
+machine: 
+  environment: 
+    CIRCLE_REVERSE_DEPENDENCIES: oauthd-service
+
+general:
+  branches:
+    only:
+      - patched
+
+dependencies:
+  override:
+    - npm version
+
+test: 
+  override:
+    - /bin/bash -c "cat package.json"
+
+deployment: 
+  prod: 
+    branch: patched
+    commands: 
+      - "./circle_ci_trigger_build"
