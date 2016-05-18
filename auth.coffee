@@ -153,6 +153,10 @@ module.exports = (env) ->
 			if user?.id
 				env.data.redis.sadd 'u:' + user.id + ':apps', app.id
 
+		env.events.on 'app.remove', (user, app) ->
+			if user?.id
+				env.data.redis.srem 'u:' + user.id + ':apps', app.id
+
 		callback()
 		
 	auth
